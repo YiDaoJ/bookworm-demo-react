@@ -4,7 +4,7 @@ class TestPage extends Component {
   render() {
     return (
       <div>
-        
+        Hier ist TestPage
       </div>
     );
   }
