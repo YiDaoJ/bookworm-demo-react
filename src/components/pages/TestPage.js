@@ -9,6 +9,7 @@ const ActionWrapper = styled.div`
 
 const DataField = styled.fieldset`
   padding: 15px;
+  margin-bottom: 15px;
 `
 
 const DataSection = ({ actions, title, children }) => (
@@ -19,31 +20,52 @@ const DataSection = ({ actions, title, children }) => (
   </DataField>
 )
 
+const getContent = obj =>
+(obj &&
+  obj.map((value, i) => (
+    <pre key={i}>
+      {JSON.stringify(value, undefined, 2)}
+      <br />
+      <br />
+      <br />
+    </pre>
+  ))) ||
+'[]'
+
 class TestPage extends Component {
 
-  state = { projects: [] }
+  state = { projects: [], languages: [] }
   
   componentWillMount() {
     api.projects
       .fetchAll()
       .then(projects => this.setState({projects}))
+
+    api.languages
+      .fetchAll()
+      .then(languages => this.setState({languages}))
   }
   
 
   render() {
+
+    const { projects, languages } = this.state
+
     return (
       <div>
         <div style={{ padding: 100 }}>
           <DataSection title="Projects">
-            {/* {getContent(projects)} */}
-            <ActionWrapper>
+            {getContent(projects)}
+            {/* <ActionWrapper>
               <button onClick={this.onPostProjectClick}> POST </button>
               <button onClick={this.onPutProjectClick}> PUT </button>
               <button onClick={this.onPutProjectClick2}> PUT 2 </button>
               <button onClick={this.onDeleteProjectClick}> DELETE </button>
-            </ActionWrapper>
+            </ActionWrapper> */}
           </DataSection>
-          {/* <DataSection title="Languages">{getContent(languages)}</DataSection> */}
+          <DataSection title="Languages">
+            {getContent(languages)}
+          </DataSection>
           {/* <DataSection title="Extern Result"> */}
           {/* {JSON.stringify(externalResult)} */}
           {/* </DataSection> */}
