@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import api from '../../api'
 // import { connect } from 'react-redux'
 
-const ActionWrapper = styled.div`
-  padding-top: 15px;
-`
+// const ActionWrapper = styled.div`
+//   padding-top: 15px;
+// `
 
 const DataField = styled.fieldset`
   padding: 15px;
